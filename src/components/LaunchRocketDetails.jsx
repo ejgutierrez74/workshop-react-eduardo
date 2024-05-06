@@ -39,16 +39,16 @@ export function LaunchRocketDetails() {
 
                         <Flex>
                             <Text fontSize='medium'>
+                                Rocket name: <br></br> {rocket.name}  <br></br>
                                 <br></br>
                                 Rocket Description : <br></br> {rocket.description} <br></br>
                                 <Spacer />
-                                Rocket name: <br></br> {rocket.name}  <br></br><br></br>
+                               
+                                Altura rocket:<br></br> { (rocket.height.meters).toLocaleString('es-ES')} meters.
                                 <br></br>
-                                Altura rocket:<br></br> {rocket.height.meters} meters.
+                                Masa:<br></br> { (rocket.mass.kg).toLocaleString('es-ES')} kgs.
                                 <br></br>
-                                Masa:<br></br> {rocket.mass.kg} kgs.
-                                <br></br>
-                                Cost per Launch:<br></br> {rocket.cost_per_launch} dolares.
+                                Cost per Launch:<br></br> {(rocket.cost_per_launch).toLocaleString('es-ES', { style: 'currency', currency: 'USD' })} 
                             </Text>
 
                         </Flex>
