@@ -20,7 +20,7 @@ export function LaunchItemDetails() {
 
     return (
         <Fragment>
-            {launch.isEmppty ? (<Spinner
+            {Object.keys(launch).length === 0 ? (<Spinner
                 thickness='4px'
                 speed='0.65s'
                 emptyColor='gray.200'
@@ -39,7 +39,7 @@ export function LaunchItemDetails() {
                     <Flex display='flex'>
                         <Text fontSize='2xl'>
                             Mision : <strong>{launch.name}</strong> <br></br>
-                            Fecha mision : {launch.date_local}  <br></br>
+                            Fecha mision : {launch.date_local.split("T")[0]}  <br></br>
                         </Text>
 
                         <Spacer />
@@ -49,7 +49,7 @@ export function LaunchItemDetails() {
                     </Flex>
                     <Flex>
                         <Text fontSize='medium'>
-                            Link Article : <strong><a href={ launch.links && launch.links.article}>{ launch.links && launch.links.article} </a></strong> <br></br>
+                            Link Article : <strong><a href={ launch.links.article}>{ launch.links.article} </a></strong> <br></br>
                             
                             Link Wikipedia : <a href={launch.links && launch.links.wikipedia}>{launch.links && launch.links.wikipedia}</a>  <br></br>
                             
