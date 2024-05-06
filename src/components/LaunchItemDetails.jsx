@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import * as API from '../services/launches';
 import { Fragment, useEffect, useState } from "react";
-import { Spacer, Box, Text, Flex, Tag, Spinner } from "@chakra-ui/react";
+import { Spacer, Box, Text, Flex, Tag, Spinner, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export function LaunchItemDetails() {
 
@@ -49,12 +50,21 @@ export function LaunchItemDetails() {
                     </Flex>
                     <Flex>
                         <Text fontSize='medium'>
-                            Link Article : <strong><a href={ launch.links.article}>{ launch.links.article} </a></strong> <br></br>
-                            
-                            Link Wikipedia : <a href={launch.links && launch.links.wikipedia}>{launch.links && launch.links.wikipedia}</a>  <br></br>
-                            
-                            Detalles Mision: {launch.details}
+                            <br></br>
+                            Link Article : <br></br><strong><a href={ launch.links.article}>{ launch.links.article} </a></strong> <br></br>
+                            <br></br>
+                            Link Wikipedia : <br></br> <a href={launch.links && launch.links.wikipedia}>{launch.links && launch.links.wikipedia}</a>  <br></br><br></br>
+                            <br></br>
+                            Detalles Mision:<br></br> {launch.details}
                         </Text>
+                   
+                    </Flex>
+                    <Flex>                       
+                        <Link to={`/rockets/${launch.rocket}`}>
+                            <Button colorScheme='purple' mt={6}>
+                                Info about Rocket
+                            </Button>
+                        </Link>
                     </Flex>
 
                 </Box>

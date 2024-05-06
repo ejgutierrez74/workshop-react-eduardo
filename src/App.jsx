@@ -13,6 +13,7 @@ import { Route, Routes }  from 'react-router-dom';
 //import { createBrowserRouter}  from 'react-router-dom';
 import { LaunchAllList } from './components/LaunchAllList';
 import { LaunchItemDetails } from './components/LaunchItemDetails';
+import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
 
 import ErrorPage from './routes/error-page';
@@ -44,6 +45,7 @@ export function App() {
           <Route path='/about' element={<About />} />
           <Route path='/missions' element={<LaunchAllList />} />
           <Route path='launches/:launchId' element={<LaunchItemDetails />} />
+          <Route path='rockets/:rocketId' element={<LaunchRocketDetails />} />
           <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Fragment>

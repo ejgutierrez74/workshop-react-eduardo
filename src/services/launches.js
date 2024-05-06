@@ -1,4 +1,4 @@
-const API_URL = "https://api.spacexdata.com/v4";
+export const API_URL = "https://api.spacexdata.com/v4";
 const API_URLv3 = "https://api.spacexdata.com/v3";
 
 export async function getAllLaunches() {
