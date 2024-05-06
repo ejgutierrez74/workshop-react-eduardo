@@ -20,7 +20,7 @@ export function LaunchItemDetails() {
 
     return (
         <Fragment>
-            {!launch ? (<Spinner
+            {launch.isEmppty ? (<Spinner
                 thickness='4px'
                 speed='0.65s'
                 emptyColor='gray.200'
@@ -48,9 +48,12 @@ export function LaunchItemDetails() {
                         </Tag>
                     </Flex>
                     <Flex>
-                        <Text fontSize='xl'>
-                            Link Article : <strong>{launch.links}</strong> <br></br>
-                            Link Wikipedia : {launch.details}  <br></br>
+                        <Text fontSize='medium'>
+                            Link Article : <strong><a href={ launch.links && launch.links.article}>{ launch.links && launch.links.article} </a></strong> <br></br>
+                            
+                            Link Wikipedia : <a href={launch.links && launch.links.wikipedia}>{launch.links && launch.links.wikipedia}</a>  <br></br>
+                            
+                            Detalles Mision: {launch.details}
                         </Text>
                     </Flex>
 
