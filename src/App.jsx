@@ -9,7 +9,7 @@ import { getAllLaunches } from './services/launches';
 const launches = await getAllLaunches()
 */
 import { Fragment } from 'react';
-import { Route, Routes }  from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 //import { createBrowserRouter}  from 'react-router-dom';
 import { LaunchAllList } from './components/LaunchAllList';
 import { LaunchItemDetails } from './components/LaunchItemDetails';
@@ -19,24 +19,9 @@ import { About } from './components/About';
 import ErrorPage from './routes/error-page';
 import { NavBar } from './components/NavBar';
 
+/*Version1 con Routes y Navbar 
 export function App() {
-/*
-  const routerList = createBrowserRouter([
-      {
-        path: "/",
-        element: <LaunchAllList />,
-        errorElement: <ErrorPage />,
-      },
-    ]);
-  
-  const routerMissionDetails = createBrowserRouter([
-      {
-        path: "launch/:launchId",
-        element: <LaunchItemDetails />,
-        errorElement: <ErrorPage />,
-      },
-    ]);
-*/
+
   return (
     <Fragment>
       <NavBar/>
@@ -53,4 +38,57 @@ export function App() {
 
 }
 export default App
+*/
 
+/*Version2 con createBrowseRouter y RouteProvider. Version recomendada por React Router para 6.4 y posteriores */
+//Donde va Outlet es donce los hijos incrustan su elemento ej: si elijo about, me mostrara NavBar y About.
+//Tengo que añadir el hijo tambien / para que ademas del navbar me aparezca todo el listado de misiones. Si dejaba solo el headerlayout solo me mostraba el navbar
+
+const HeaderLayout = () => (
+  <Fragment>
+    <NavBar />
+    <Outlet />
+  </Fragment>
+);
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HeaderLayout />,
+    errorElement: <ErrorPage />,
+    children: [{
+      path: "/",
+      element: <LaunchAllList />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/missions",
+      element: <LaunchAllList />,
+    },
+    {
+      path: "/launches/:launchId",
+      element: <LaunchItemDetails />,
+    }, {
+      path: "/rockets/:rocketId",
+      element: <LaunchRocketDetails />,
+    },
+    {
+      path: "*",
+      element: <LaunchItemDetails />,
+    },
+
+    ]
+  }
+])
+
+
+export function App() {
+
+  return <RouterProvider router={router} />;
+
+}
+
+export default App

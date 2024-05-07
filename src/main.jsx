@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+/*
 import Papelillo from './App.jsx'
-import { BrowserRouter } from "react-router-dom";
+import { BrowerRouter } from "react-router-dom";
+*/
 
 import { ChakraProvider } from '@chakra-ui/react';
+import Papelillo from './App.jsx'
 
 const rootElement = document.getElementById('root');
 
-/* V1 Sin router creado*/
+/*v1
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
@@ -18,23 +21,17 @@ ReactDOM.createRoot(rootElement).render(
     </ChakraProvider>
   </React.StrictMode>,
 )
+*/
 
-
-/*Version2 con createBrowseRouter y RouteProvider. No se ve el itemDetails 
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Papelillo />,
-    errorElement: <ErrorPage />,
-  },
-]);
+/*v2*/
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />   
+        <Papelillo />
     </ChakraProvider>
   </React.StrictMode>,
 )
-*/
+
+
+
