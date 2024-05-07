@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Heading } from "@chakra-ui/react";
 import * as API from "../services/launches";
 
-export function LaunchAllList() {
+export default function LaunchAllList() {
 
     const [launches, setLaunches] = useState([]);
 

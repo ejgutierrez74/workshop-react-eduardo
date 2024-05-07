@@ -11,7 +11,7 @@ const launches = await getAllLaunches()
 import { Fragment } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 //import { createBrowserRouter}  from 'react-router-dom';
-import { LaunchAllList } from './components/LaunchAllList';
+//import { LaunchAllList } from './components/LaunchAllList';
 import { LaunchItemDetails } from './components/LaunchItemDetails';
 import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
@@ -44,6 +44,24 @@ export default App
 //Donde va Outlet es donce los hijos incrustan su elemento ej: si elijo about, me mostrara NavBar y About.
 //Tengo que añadir el hijo tambien / para que ademas del navbar me aparezca todo el listado de misiones. Si dejaba solo el headerlayout solo me mostraba el navbar
 
+import React from 'react';
+import { Spinner } from '@chakra-ui/react';
+const LaunchAllList = React.lazy(() => import("./components/LaunchAllList"));
+
+function Loading() {
+  return (<Fragment>
+            <h2>🌀 Loading...</h2>
+            <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />
+          </Fragment>
+          )
+}
+
 const HeaderLayout = () => (
   <Fragment>
     <NavBar />
@@ -58,7 +76,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [{
       path: "/",
-      element: <LaunchAllList />,
+      element: (
+        <React.Suspense fallback={<Loading />}>
+          <LaunchAllList />
+        </React.Suspense>
+      )
     },
     {
       path: "/about",

@@ -32,3 +32,4 @@ Enlaces:
 - Añadir/corregir comprobacion de objeto antes de renderizar
 - Actualización a V4 Space X API
 - Añadir Rockets y visualizacion datos del Rocket mediante API.
+- Actualización a la forma recomendada React Router versiones 6.4 y posteriores. Utilizar createBrowserRouter y un RouterProvider.
