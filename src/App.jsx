@@ -15,9 +15,8 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { LaunchItemDetails } from './components/LaunchItemDetails';
 import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
-
-import ErrorPage from './routes/error-page';
 import { NavBar } from './components/NavBar';
+import ErrorPage from './routes/error-page';
 
 /*Version1 con Routes y Navbar 
 export function App() {
