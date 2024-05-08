@@ -10,18 +10,25 @@ export default function LaunchAllList() {
     const [launches, setLaunches] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-   // const [page, setPage] = useState(0);
+    // const [page, setPage] = useState(0);
 
     useEffect(() => {
         // Create an AbortController for managing the requests
         const abortController = new AbortController();
-        const signal = abortController.signal;
+
         const cachedData = sessionStorage.getItem('my-data');
 
         if (cachedData) {
-            setLaunches(JSON.parse(cachedData));
+            try {
+                const parsedData = JSON.parse(cachedData);
+                setLaunches(parsedData);
+            } catch (error) {
+                console.error("Error parsing cached data:", error);
+                sessionStorage.removeItem('my-data');
+            }
+
         } else {
-            API.getAllLaunches({ signal})
+            API.getAllLaunches()
                 .then(data => {
                     sessionStorage.setItem('my-data', JSON.stringify(data));
                     setLaunches(data); // Set the fetched data
@@ -37,13 +44,13 @@ export default function LaunchAllList() {
                 .finally(() => setIsLoading(false)); // Turn off loading indicator
         }
         setIsLoading(false);
-        
+
         return () => {
             // al desmontar el componente, abortamos la petición
             // sólo funcionará si la petición sigue en curso
             abortController.abort();
-            setIsLoading(true); // Turn on loading indicator
-          }
+            setIsLoading(false); // Turn on loading indicator
+        }
 
     }, []); // Run the effect only once on component mount
 
@@ -51,8 +58,8 @@ export default function LaunchAllList() {
         <Fragment>
             <Heading as='h1' size='lg' m={8}> Space X Launches</Heading>
             <section>
-                
-                {/* Display errors if any */ }
+
+                {/* Display errors if any */}
                 {error && <ErrorAPI error={error} />}
 
                 {/* Display loading indicator */}
@@ -63,7 +70,7 @@ export default function LaunchAllList() {
                         <LaunchItem key={launch.id} {...launch} />
                     ))
                 }
-            
+
             </section>
         </Fragment>
     );
