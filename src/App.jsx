@@ -16,7 +16,7 @@ import { LaunchItemDetails } from './components/LaunchItemDetails';
 import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
 import { NavBar } from './components/NavBar';
-import ErrorPage from './routes/error-page';
+import { ErrorPageItemDetails } from './routes/error-page-item-details';
 
 /*Version1 con Routes y Navbar 
 export function App() {
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HeaderLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPageItemDetails />,
     children: [{
       path: "/",
       element: (
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
     },
     {
       path: "*",
-      element: <LaunchItemDetails />,
+      element: <ErrorPageItemDetails />,
     },
 
     ]

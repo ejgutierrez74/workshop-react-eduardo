@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 
-export default function ErrorPageItemDetails() {
+export function ErrorPageItemDetails() {
   const error = useRouteError();
   console.error(error);
 

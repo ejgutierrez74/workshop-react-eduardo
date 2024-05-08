@@ -36,6 +36,14 @@ export default function LaunchAllList() {
                 })
                 .finally(() => setIsLoading(false)); // Turn off loading indicator
         }
+        setIsLoading(false);
+        
+        return () => {
+            // al desmontar el componente, abortamos la petición
+            // sólo funcionará si la petición sigue en curso
+            abortController.abort();
+            setIsLoading(true); // Turn on loading indicator
+          }
 
     }, []); // Run the effect only once on component mount
 
