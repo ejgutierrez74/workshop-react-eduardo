@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
-export default function useFetch(url) {
+
+export default function useCustomFetchAsync(url) {
 
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [controller, setController] = useState(null);
+
+
     // const [page, setPage] = useState(0);
 
     useEffect(() => {
@@ -13,11 +16,12 @@ export default function useFetch(url) {
         //or the user cancel the request or the request is no longer needed
         //Example: Netflix episode you are watching is changed, so the previous request is no longer needed
         //If the request is not cancelled, it will still be running in the background and consume resources
-
+        
         const abortController = new AbortController();
 
         //Signal is some kind of rastreable object that can be used to cancel the fetch request
         const signal = abortController.signal;
+
         const cachedData = sessionStorage.getItem('my-data');
 
         //Initializes the controller a null and setLoading to true
@@ -34,36 +38,33 @@ export default function useFetch(url) {
                 console.error("Error parsing cached data:", error);
                 sessionStorage.removeItem('my-data');
             }
-            setIsLoading(false); // Turn off loading indicator..The data is already in the session storage
-
+            finally {
+                setIsLoading(false); // Turn off loading indicator..The data is already in the session storage
+            }
         } else {
 
             //We don't have cached data, so we fetch the data
-            fetch(url, { signal })
-                .then(response => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(url, {signal});
+
                     if (!response.ok) {
-                        throw Error('Failed to fetch data');
+                        throw new Error(`HTTP error: Status ${response.status}`);
                     }
-                    //return response.json(); which is the response body as a JSON object
-                    return response.json();
-                })
-                .then(
-                    //data is the response body as a JSON object
-                    data => {
-                        sessionStorage.setItem('my-data', JSON.stringify(data));
-                        setData(data); // Set the fetched data
-                        setError(null); // Clear any previous errors
-                    })
-                .catch((error) => {
-                    if (error.name === "AbortError") {
-                        console.log("Fetch aborted"); // Log a message when the request is intentionally aborted
-                    }
-                    else {
-                        setError(error.message); // Handle and set the error message
-                    }
-                })
-                .finally(() => setIsLoading(false)); // Turn off loading indicator
+                    let responsedata = await response.json();
+                    setData(responsedata);
+                    setError(null);
+                } catch (err) {
+                    setError(err.message);
+                    setData(null);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            fetchData();
         }
+    
 
         //useEffect has a cleanup function that runs when the component is unmounted
         //when the component is unmounted ? 
@@ -71,22 +72,22 @@ export default function useFetch(url) {
         // Example: the user closes the tab or the browser or changes url
 
         return () => {
-            // When the compoment is aborted we abort the request
-            // sólo funcionará si la petición sigue en curso
-            abortController.abort();
-            // setIsLoading(false); // Turn on loading indicator
-        }
-
-    }, []); // Run the effect only once on component mount
-
-    const handleCancelRequest = () => {
-        if (controller) {
-            controller.abort();
-            setError("Request Cancelled");
-        }
+        // When the compoment is aborted we abort the request
+        // sólo funcionará si la petición sigue en curso
+        abortController.abort();
+        // setIsLoading(false); // Turn on loading indicator
     }
 
-    return { data, error, isLoading, handleCancelRequest };
+}, []); // Run the effect only once on component mount
+
+const handleCancelRequest = () => {
+    if (controller) {
+        controller.abort();
+        setError("Request Cancelled");
+    }
+}
+
+return { data, error, isLoading, handleCancelRequest };
 }
 
 /* Example of use:
