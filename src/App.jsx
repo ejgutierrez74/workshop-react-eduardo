@@ -17,6 +17,7 @@ import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
 import { NavBar } from './components/NavBar';
 import { ErrorPageItemDetails } from './routes/error-page-item-details';
+import { ComponentChatBox } from './components/chatbot/ComponentChatBot';
 
 /*Version1 con Routes y Navbar 
 export function App() {
@@ -61,10 +62,13 @@ function Loading() {
           )
 }
 
+
+
 const HeaderLayout = () => (
   <Fragment>
     <NavBar />
     <Outlet />
+    <ComponentChatBox />
   </Fragment>
 );
 
