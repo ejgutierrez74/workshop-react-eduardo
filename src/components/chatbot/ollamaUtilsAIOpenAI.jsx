@@ -68,7 +68,7 @@ export function get_prompt_chatv2(prompts, responses, verbose = false) {
 }
     
 
-export function llama_openaiv2(prompt, add_inst = true, model = "llama2", temperature = 0.0, max_tokens = 1024, verbose = false) {
+export function llama_openaiv2(client, prompt, add_inst = true, model = "llama2", temperature = 0.0, max_tokens = 1024, verbose = false) {
     if (add_inst) {
         prompt = `[INST]${prompt}[/INST]`;
     }

@@ -19,11 +19,17 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
     let api_key = null;
 	let has_error = false;
 */
+
 	// example gemini stream
 	// you can replace with other LLMs or even have a simulated stream
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "";
 	const gemini_stream = async (params) => {
-		try {
-			const genAI = new GoogleGenerativeAI(api_key);
+		
+        try {
+			const genAI = new GoogleGenerativeAI(API_KEY);
 			const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 			const result = await model.generateContentStream(params.userInput);
 
@@ -50,6 +56,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 			await params.streamMessage(text);
 		} catch {
 			await params.injectMessage("Unable to load model, is your API Key valid?");
-			has_error = true;
+			//has_error = true;
 		}
 	}
+export { gemini_stream };
