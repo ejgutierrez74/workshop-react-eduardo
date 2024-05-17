@@ -8,6 +8,41 @@ const client = new OpenAI({
     api_key: 'ollama',
 });
 */
+
+/*
+export function getPromptChatFromMessages(messageHistory, verbose = false) {
+    
+    let prompt_chat = "";
+    if (verbose) {
+        console.log(`Longitud mensajes:\n${messageHistory.length}\n`);
+       // console.log(`Longitud repuestas:\n${responses.length}\n`);
+    }
+
+    let size = 0;
+    let previousMessage = null;
+
+    messageHistory.map( (message) => {
+        if (message.role === 'user') {
+            prompt_chat += `<s>[INST] \n${message.content}\n [/INST] \n`;
+        } 
+        else if (message.role === 'assistant')) {
+            prompt_chat += `${message.content}</s> \n`;
+        }
+        else if (message.role === 'system')) {
+            prompt_chat += `<s>[INST]<<SYS>>${message.content}<</SYS>> \n`;
+        }
+        for (let responseActual of responses) {
+        prompt_chat += `<s>[INST] \n${prompts[size]}\n [/INST] \n${responseActual}\n </s>`;
+        size = size + 1;
+    }
+
+    // Añadimos el ultimo prompt
+    prompt_chat += `<s>[INST] \n${prompts[prompts.length - 1]}\n [/INST] \n`;
+
+    return prompt_chat;
+}
+*/
+
 export function get_prompt_chatv2(prompts, responses, verbose = false) {
     let prompt_chat = "";
     if (verbose) {
