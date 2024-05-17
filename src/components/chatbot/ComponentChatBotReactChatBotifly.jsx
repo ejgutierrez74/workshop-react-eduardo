@@ -11,10 +11,9 @@ import ChatBot from 'react-chatbotify';
 const model = 'llama3';
 let messageHistory = [];
 
-import {fetchDataOpenAI as fetchData, openai as client}  from './ollamaOpenAi.jsx';
+//import {fetchDataOpenAI as fetchData, openai as client}  from './ollamaOpenAi.jsx';
 
-//or 
-//import {fetchDataOpenAI as fetchData, openai as ollama}  from 'ollamajs.jsx';
+import {fetchData as fetchData, ollama as ollama}  from './ollamajs.jsx';
 
 function updateMessages(rol, content) {
     messageHistory.push({ role: rol, content: content });
@@ -27,7 +26,8 @@ export default function ComponentChatBotReactChatBotifly() {
     const flow = {
         start: {
             message: (params) => {
-                messageHistory.clear();
+                //This will clear the existing array by setting its length to 0. It also works when using "strict mode"
+                messageHistory.length=0;
                 updateMessages('system', 'You are a helpful assistant. You are here to help the user with their queries. Be kind and short in your responses.');
                 params.injectMessage("Hi my name is Edubot. Im here to help you");
                 params.injectMessage("Can you write your username, so i can address you ?");
@@ -50,11 +50,16 @@ export default function ComponentChatBotReactChatBotifly() {
             message: async (params) => {
                 updateMessages('user', `${params.userInput}`);
                 const [result, error]  = await fetchData(model, messageHistory);
-                if (error !== 0) {
-                    //Error message 
-                    params.injectMessage('${result}');
+                if (error === 0) {
+                    //No error found. Update messages and show message to the user
+                    params.injectMessage(`${result}`);
+                    updateMessages('assistant', `${result}`);
                 }
-                return result;
+                else {
+                    //Error message. only show message to the user
+                    params.injectMessage(`Oh no, i got an error: ${result}!`);
+                }
+               // return result;
             },
             path: "loop",
         }

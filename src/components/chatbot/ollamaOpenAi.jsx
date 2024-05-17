@@ -24,8 +24,7 @@ const openai = new OpenAI({
     // required but ignored
     apiKey: 'ollama',
     //// required for testing on browser side, not recommended. API key should be kept secret and stored in server.
-    dangerouslyAllowBrowser: true  
-    
+    dangerouslyAllowBrowser: true,
   })
 
 //
