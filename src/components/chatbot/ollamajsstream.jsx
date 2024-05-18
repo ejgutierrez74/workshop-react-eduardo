@@ -20,15 +20,19 @@ async function fetchData(model, messageHistory, params) {
             messages: messageHistory,
             stream: true // Stream the response
         })
+
+        let chunks = [];
         for await (const part of response) {
             // Handle the streamed response
             params.streamMessage(part.message.content);
             console.log("Chunk the streaming" + part.message.content);
+            chunks.push(part.message.content);
           }
 
           // get all the chunks to get the final response
-            const final_response = await response.complete();
-        return [response.message.content, 0];
+        let fullMessage = chunks.join('');
+        console.log("Full message: " + fullMessage);
+        return [fullMessage, 0];
     }
     catch (error) {
         if (error.name === 'AbortError') {
