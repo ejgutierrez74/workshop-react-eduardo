@@ -7,6 +7,7 @@ process while providing the flexibility to implement advanced features
 */
 
 import ChatBot from 'react-chatbotify';
+import myBotOptions from '../../styles/ChatBotifyOptions.jsx';
 
 const model = 'llama3';
 let messageHistory = [];
@@ -66,6 +67,7 @@ export default function ComponentChatBotReactChatBotifly() {
         }
     }
     return (
-        <ChatBot options={{ theme: { embedded: false }, chatHistory: { storageKey: "example_simulation_stream" }, botBubble: { simStream: true } }} flow={flow} />
+        <ChatBot options={myBotOptions} flow={flow} />
+        //<ChatBot options={{ theme: { embedded: false }, chatHistory: { storageKey: "example_simulation_stream" }, botBubble: { simStream: true } }} flow={flow} />
     )
 }

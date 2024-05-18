@@ -6,7 +6,7 @@ const ollama = new Ollama({ host: 'http://localhost:11434' })
 // Fetches data from the chatbot API.
 // @returns {Promise<[string, number]>} A promise that resolves to an array containing the response message content and an error code.
 // 
-async function fetchData(model, messageHistory) {
+async function fetchData(model, messageHistory, params) {
    // Set a timeout to abort the request after 60 second
     setTimeout(() => {
     console.log('\nAborting request...\n')
@@ -25,6 +25,9 @@ async function fetchData(model, messageHistory) {
             params.streamMessage(part.message.content);
             console.log("Chunk the streaming" + part.message.content);
           }
+
+          // get all the chunks to get the final response
+            const final_response = await response.complete();
         return [response.message.content, 0];
     }
     catch (error) {
