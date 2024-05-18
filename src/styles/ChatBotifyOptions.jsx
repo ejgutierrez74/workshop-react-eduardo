@@ -107,7 +107,7 @@ const myBotOptions = {
 		animate: true,
 		showAvatar: false,
 		avatar: botAvatar,
-        //Specifies whether to simulate text messages from the bot as a stream. Before was fale
+        //Specifies whether to simulate text messages from the bot as a stream. Before was false
 		simStream: true,
 		streamSpeed: 30,
 		dangerouslySetInnerHtml: false,

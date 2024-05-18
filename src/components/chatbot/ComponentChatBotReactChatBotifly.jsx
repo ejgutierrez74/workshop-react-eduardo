@@ -14,7 +14,9 @@ let messageHistory = [];
 
 //import {fetchDataOpenAI as fetchData, openai as client}  from './ollamaOpenAi.jsx';
 
-import {fetchData as fetchData, ollama as ollama}  from './ollamajs.jsx';
+//import {fetchData as fetchData, ollama as ollama}  from './ollamajs.jsx';
+
+import {fetchData as fetchData, ollama as ollama}  from './ollamajsstream.jsx';
 
 function updateMessages(rol, content) {
     messageHistory.push({ role: rol, content: content });
@@ -50,7 +52,7 @@ export default function ComponentChatBotReactChatBotifly() {
         loop: {
             message: async (params) => {
                 updateMessages('user', `${params.userInput}`);
-                const [result, error]  = await fetchData(model, messageHistory);
+                const [result, error]  = await fetchData(model, messageHistory, params);
                 console.log("Resultado en loop", result);
                 if (error === 0) {
                     //No error found. Update messages and show message to the user
