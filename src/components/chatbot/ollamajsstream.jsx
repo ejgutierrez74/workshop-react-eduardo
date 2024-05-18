@@ -18,7 +18,13 @@ async function fetchData(model, messageHistory) {
         const response = await ollama.chat({
             model: model,
             messages: messageHistory,
+            stream: true // Stream the response
         })
+        for await (const part of response) {
+            // Handle the streamed response
+            params.streamMessage(part.message.content);
+            console.log("Chunk the streaming" + part.message.content);
+          }
         return [response.message.content, 0];
     }
     catch (error) {

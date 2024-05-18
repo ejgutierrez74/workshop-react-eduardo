@@ -50,6 +50,7 @@ export default function ComponentChatBotReactChatBotifly() {
             message: async (params) => {
                 updateMessages('user', `${params.userInput}`);
                 const [result, error]  = await fetchData(model, messageHistory);
+                console.log("Resultado en loop", result);
                 if (error === 0) {
                     //No error found. Update messages and show message to the user
                     params.injectMessage(`${result}`);
