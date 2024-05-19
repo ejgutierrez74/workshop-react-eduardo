@@ -23,28 +23,28 @@ function updateMessages(rol, content) {
     return messageHistory;
 }
 
-export default function ComponentChatBotReactChatBotifly() {
+export default function ComponentReactChatBotiflyOllama() {
 
 
     const flow = {
         start: {
-            message: (params) => {
+            message: async (params) => {
                 //This will clear the existing array by setting its length to 0. It also works when using "strict mode"
                 messageHistory.length=0;
                 updateMessages('system', 'You are a helpful assistant. You are here to help the user with their queries. Be kind and short in your responses.');
-                params.injectMessage("Hi my name is Edubot. Im here to help you");
-                params.injectMessage("Can you write your username, so i can address you ?");
+                await params.injectMessage("Hi my name is Edubot. Im here to help you");
+                await params.injectMessage("Can you write your username, so i can address you ?");
                 updateMessages('assistant', 'Hi my name is Edubot. Im here to help you');
                 updateMessages('assistant', 'Can you write your username, so i can address you ?');
             },
             path: "askname"
         },
         askname: {
-            message: (params) => {
+            message: async (params) => {
                 updateMessages('user', `${params.userInput}`);
-                params.injectMessage(`Nice to meet you ${params.userInput}!`);
+                await params.injectMessage(`Nice to meet you ${params.userInput}!`);
                 updateMessages('assistant', `Nice to meet you ${params.userInput}!`);
-                params.injectMessage("Ask anything i will try to help you!");
+                await params.injectMessage("Ask anything i will try to help you!");
                 updateMessages('user', 'Ask anything i will try to help you!');
             },
             path: "loop",
@@ -56,7 +56,7 @@ export default function ComponentChatBotReactChatBotifly() {
                 console.log("Resultado en loop", result);
                 if (error === 0) {
                     //No error found. Update messages and show message to the user
-                    params.injectMessage(`${result}`);
+                    await params.injectMessage(`${result}`);
                     updateMessages('assistant', `${result}`);
                 }
                 else if (error === 100) {
@@ -66,7 +66,7 @@ export default function ComponentChatBotReactChatBotifly() {
                 }
                 else {
                     //Error message. only show message to the user
-                    params.injectMessage(`Oh no, i got an error: ${result}!`);
+                    await params.injectMessage(`Oh no, i got an error: ${result}!`);
                 }
                // return result;
             },

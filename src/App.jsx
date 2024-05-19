@@ -17,7 +17,7 @@ import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
 import { NavBar } from './components/NavBar';
 import { ErrorPageItemDetails } from './routes/error-page-item-details';
-import MyChatbot  from './components/chatbot/ComponentChatBotReactChatBotifly';
+import MyChatbot  from './components/chatbot/ComponentReactChatBotiflyGemini';
 
 /*Version1 con Routes y Navbar 
 export function App() {

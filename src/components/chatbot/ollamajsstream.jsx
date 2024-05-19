@@ -1,6 +1,6 @@
 import { Ollama } from 'ollama';
 
-const ollama = new Ollama({ host: 'http://localhost:11434' })
+const ollama = new Ollama({ host: import.meta.env.VITE_OLLAMA_HOST})
 
 //
 // Fetches data from the chatbot API.
@@ -27,7 +27,7 @@ async function fetchData(model, messageHistory, params) {
             //await params.streamMessage(part.message.content);
             chunks.push(part.message.content);
             let partialMessage = chunks.join('');
-            params.streamMessage(partialMessage);
+            await params.streamMessage(partialMessage);
             console.log("Chunk the streaming" + part.message.content);
            // chunks.push(part.message.content);
         }
