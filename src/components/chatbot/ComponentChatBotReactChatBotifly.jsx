@@ -59,6 +59,11 @@ export default function ComponentChatBotReactChatBotifly() {
                     params.injectMessage(`${result}`);
                     updateMessages('assistant', `${result}`);
                 }
+                else if (error === 100) {
+                    //Code 100 is for streaming response. No need to inject message only update the messages array
+                   // params.injectMessage(`${result}`);
+                    updateMessages('assistant', `${result}`);
+                }
                 else {
                     //Error message. only show message to the user
                     params.injectMessage(`Oh no, i got an error: ${result}!`);

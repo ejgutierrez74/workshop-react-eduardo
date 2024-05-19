@@ -18,11 +18,12 @@ Usage:
     model: 'llama3',
     })
 */
+const apiKey = import.meta.env.VITE_REACT_APP_API_KEY_OLLAMA;
 
 const openai = new OpenAI({
     baseURL: 'http://localhost:11434/v1/',
     // required but ignored
-    apiKey: 'ollama',
+    apiKey: apiKey,
     //// required for testing on browser side, not recommended. API key should be kept secret and stored in server.
     dangerouslyAllowBrowser: true,
   })

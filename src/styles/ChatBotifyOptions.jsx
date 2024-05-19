@@ -5,6 +5,9 @@ import chatButton from "../assets/chatboticons/chat_button.png";
 import fileAttachmentIcon from "../assets/chatboticons/file_attachment_icon.svg";
 import emojiIcon from "../assets/chatboticons/emoji_icon.svg";
 
+//This is a copy of the default configuration for the chatbot. You can change the values to customize the chatbot.
+//If you comment or delete some option it would take the default value.
+
 const myBotOptions = {
 	// tracks state of chat window, also the default state to load it in
 	isOpen: false,

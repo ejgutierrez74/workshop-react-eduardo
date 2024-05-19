@@ -7,13 +7,13 @@ const ollama = new Ollama({ host: 'http://localhost:11434' })
 // @returns {Promise<[string, number]>} A promise that resolves to an array containing the response message content and an error code.
 // 
 async function fetchData(model, messageHistory, params) {
-   // Set a timeout to abort the request after 60 second
+    // Set a timeout to abort the request after 60 second
     setTimeout(() => {
-    console.log('\nAborting request...\n')
-    ollama.abort()
-  }, 60000) // 1000 milliseconds = 1 second
-  
-  
+        console.log('\nAborting request...\n')
+        ollama.abort()
+    }, 60000) // 1000 milliseconds = 1 second
+
+
     try {
         const response = await ollama.chat({
             model: model,
@@ -24,15 +24,19 @@ async function fetchData(model, messageHistory, params) {
         let chunks = [];
         for await (const part of response) {
             // Handle the streamed response
-            params.streamMessage(part.message.content);
-            console.log("Chunk the streaming" + part.message.content);
+            //await params.streamMessage(part.message.content);
             chunks.push(part.message.content);
-          }
+            let partialMessage = chunks.join('');
+            params.streamMessage(partialMessage);
+            console.log("Chunk the streaming" + part.message.content);
+           // chunks.push(part.message.content);
+        }
 
-          // get all the chunks to get the final response
+        // get all the chunks to get the final response
         let fullMessage = chunks.join('');
         console.log("Full message: " + fullMessage);
-        return [fullMessage, 0];
+        //Return error code 100 -> as is a streaming response no need to injectMessage
+        return [fullMessage, 100];
     }
     catch (error) {
         if (error.name === 'AbortError') {
