@@ -7,35 +7,35 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\""
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@google/generative-ai": "^0.11.3",
-    "axios": "^1.6.8",
-    "framer-motion": "^11.1.7",
+    "axios": "^1.7.0",
+    "eslint": "^9.3.0",
+    "framer-motion": "^11.2.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "ollama": "^0.5.1",
     "openai": "^4.47.1",
-    "react": "^18.2.0",
-    "react-chatbotify": "^1.6.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.2.0",
-    "react-router-dom": "^6.23.0",
-    "react-simple-chatbot": "^0.5.0",
-    "sort-by": "^0.0.2"
+    "react": "^18.3.1",
+    "react-chatbotify": "^1.6.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.23.1",
+    "sort-by": "^1.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "vite": "^5.2.0"
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "vite": "^5.2.11"
   }
 }
