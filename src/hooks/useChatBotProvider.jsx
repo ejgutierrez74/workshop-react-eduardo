@@ -1,28 +1,36 @@
 // useChatBotProvider.js
-// useChatBotProvider.js
 import useGeminiBot from './useGeminiBot';
 import useOllamaBot from './useOllamaBot';
 
 const useChatBotProvider = (provider, model) => {
-    
-    const { sendMessage: sendGeminiMessage } = useGeminiBot(model);
-    const { sendMessage: sendOllamaMessage } = useOllamaBot(model);
+  const geminiBot = useGeminiBot(model);
+  const ollamaBot = useOllamaBot(model);
 
-    const sendMessage = async (userInput, streamMessage) => {
+  const sendMessage = async (userInput, streamMessage) => {
+    if (provider === 'gemini') {
+      await geminiBot.sendMessage(userInput, streamMessage);
+    } else if (provider === 'ollama') {
+      await ollamaBot.sendMessage(userInput, streamMessage);
+    }
+    // Agregar lógica para otros proveedores aquí según sea necesario
+  };
 
-        if (provider === 'gemini') {
-            await sendGeminiMessage(userInput, streamMessage);
-        } else if (provider === 'ollama') {
-            const messageHistory = [{ role: 'user', content: userInput }]; // Define el historial de mensajes
-            await sendOllamaMessage(model, messageHistory, streamMessage);
-        }
-        // Agregar lógica para otros proveedores aquí según sea necesario
-    };
+  let messageHistory = [];
+  let updateMessages = () => {};
 
-    return { sendMessage };
+  if (provider === 'ollama') {
+    messageHistory = ollamaBot.messageHistory;
+    updateMessages = ollamaBot.updateMessages;
+  }
+
+  return { sendMessage, messageHistory, updateMessages };
 };
 
 export default useChatBotProvider;
+
+
+
+
 
 /*
 // En nuestro caso va donde ChatBotApp.jsx
