@@ -7,13 +7,13 @@ const ollama = new Ollama({ host: 'http://localhost:11434' })
 // @returns {Promise<[string, number]>} A promise that resolves to an array containing the response message content and an error code.
 // 
 async function fetchData(model, messageHistory) {
-   // Set a timeout to abort the request after 60 second
+    // Set a timeout to abort the request after 60 second
     setTimeout(() => {
-    console.log('\nAborting request...\n')
-    ollama.abort()
-  }, 60000) // 1000 milliseconds = 1 second
-  
-  
+        console.log('\nAborting request...\n')
+        ollama.abort()
+    }, 60000) // 1000 milliseconds = 1 second
+
+
     try {
         const response = await ollama.chat({
             model: model,

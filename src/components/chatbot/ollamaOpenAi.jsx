@@ -26,23 +26,23 @@ const openai = new OpenAI({
     apiKey: apiKey,
     //// required for testing on browser side, not recommended. API key should be kept secret and stored in server.
     dangerouslyAllowBrowser: true,
-  })
+})
 
 //
- // Fetches data from OpenAI chat API.
- //
- // @param {string} model - The model to use for chat completion.
- // @returns {Promise<[string, number]>} - A promise that resolves to an array containing the chat completion response and a status code.
- //
+// Fetches data from OpenAI chat API.
+//
+// @param {string} model - The model to use for chat completion.
+// @returns {Promise<[string, number]>} - A promise that resolves to an array containing the chat completion response and a status code.
+//
 async function fetchDataOpenAI(model, messageHistory) {
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: messageHistory,
             model: model,
-          })
-          return [chatCompletion.data.choices[0].message.content,0];
+        })
+        return [chatCompletion.data.choices[0].message.content, 0];
     }
-    catch (error) { 
+    catch (error) {
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
@@ -64,4 +64,4 @@ async function fetchDataOpenAI(model, messageHistory) {
     }
 }
 
-export { fetchDataOpenAI, openai};
+export { fetchDataOpenAI, openai };

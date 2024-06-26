@@ -17,7 +17,17 @@ import { LaunchRocketDetails } from './components/LaunchRocketDetails';
 import { About } from './components/About';
 import { NavBar } from './components/NavBar';
 import { ErrorPageItemDetails } from './routes/error-page-item-details';
-import MyChatbot  from './components/chatbot/ComponentReactChatBotiflyGemini';
+//import MyChatbot  from './components/chatbot/ComponentReactChatBotiflyGemini';
+
+import MyChatbot  from './components/chatbot/ChatBotComponent';
+import { avalaibleProvidersandModels } from './components/chatbot/ChatBotAvalaibleProvidersModels';
+
+//Eliges un provider y un modelo de chatbot, en este caso el segundo de la lista ( ollama y llama3)
+
+const providerChatbot = avalaibleProvidersandModels[1].provider;
+console.log("Provider", providerChatbot);
+const modelChatbot = avalaibleProvidersandModels[1].model;
+console.log("Model", modelChatbot);
 
 /*Version1 con Routes y Navbar 
 export function App() {
@@ -68,7 +78,7 @@ const HeaderLayout = () => (
   <Fragment>
     <NavBar />
     <Outlet />
-    <MyChatbot />
+    <MyChatbot provider={providerChatbot} model={modelChatbot} />
   </Fragment>
 );
 
