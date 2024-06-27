@@ -51,7 +51,7 @@ export const avalaibleProvidersandModels = [
     },
     {
         provider: "google",
-        model: "gemini-1.5-pro"
+        model: "gemini-1.5-pro-latest"
     },
     {
         provider: "google",

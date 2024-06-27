@@ -24,9 +24,9 @@ import { avalaibleProvidersandModels } from './components/chatbot/ChatBotAvalaib
 
 //Eliges un provider y un modelo de chatbot, en este caso el segundo de la lista ( ollama y llama3)
 
-const providerChatbot = avalaibleProvidersandModels[1].provider;
+const providerChatbot = avalaibleProvidersandModels[2].provider;
 console.log("Provider", providerChatbot);
-const modelChatbot = avalaibleProvidersandModels[1].model;
+const modelChatbot = avalaibleProvidersandModels[2].model;
 console.log("Model", modelChatbot);
 
 /*Version1 con Routes y Navbar 
